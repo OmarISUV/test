@@ -40,7 +40,7 @@ route.get("/users/register", async (request, response) => {
     },
   });
 
-  if (user) response.send("USER ALREADY EXIST!");
+  if (user) return response.send("USER ALREADY EXIST!");
 
   await PrismaClient.user.create({
     data: {
