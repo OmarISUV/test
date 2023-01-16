@@ -78,7 +78,7 @@ route.get("/users/login", async (request, response) => {
   if (bcrypt.compareSync(password, user.password))
     token = generateJWT(username);
 
-  response.json({
+  return response.json({
     username,
     token,
   });
