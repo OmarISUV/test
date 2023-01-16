@@ -4,6 +4,7 @@
   "scripts": {
     "env:dev": "cp -f .env.dev .env",
     "prisma": "npx prisma generate",
+    "db:seed": "node scripts/db/seed.mjs",
     "dev": "node --watch server.mjs",
     "start": "node server.mjs",
     "deploy": "npx serverless deploy --force --verbose",
