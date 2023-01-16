@@ -24,10 +24,10 @@ route.use(cors());
 
 /**
  * Endpoint to register with unique username and a random password
- * http://localhost:3000/users/register?username=someuser&name=somename
+ * http://localhost:3000/authentication/register?username=someuser&name=somename
  */
 route.get(
-  "/users/register",
+  "/authentication/register",
   AuthenticationMiddleware,
   async (request, response) => {
     const { username, name } = request.query;
@@ -63,9 +63,9 @@ route.get(
 
 /**
  * Endpoint to login with existing username and valid password
- * http://localhost:3000/users/login?username=someuser&password=somepassword
+ * http://localhost:3000/authentication/login?username=someuser&password=somepassword
  */
-route.get("/users/login", async (request, response) => {
+route.get("/authentication/login", async (request, response) => {
   const { username, password } = request.query;
   let token = null;
 
