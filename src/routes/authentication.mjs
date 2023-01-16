@@ -5,6 +5,7 @@ import { Router } from "express";
 import cors from "cors";
 import { client as PrismaClient } from "../config/prisma.mjs";
 import { middleware as AuthenticationMiddleware } from "../middleware/authentication.mjs";
+import { middleware as AuthorizationMiddleware } from "../middleware/authorization.mjs"
 
 /**
  * Function to generate a JWT
@@ -15,7 +16,6 @@ const generateJWT = (key) => {
   const SECRET = process.env.TOKEN_SECRET;
   console.log("SECRET", SECRET);
   return jwt.sign({ key }, SECRET, { expiresIn: "10h" });
-  //return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
 };
 
 const route = Router();
@@ -26,11 +26,12 @@ route.use(cors());
  * Endpoint to register with unique username and a random password
  * http://localhost:3000/authentication/register?username=someuser&name=somename
  */
-route.get(
+route.post(
   "/authentication/register",
   AuthenticationMiddleware,
+  AuthorizationMiddleware,
   async (request, response) => {
-    const { username, name } = request.query;
+    const { username, name } = request.body;
 
     const randomPassword = (Math.random() + 1).toString(36).substring(7);
     const hashedPassword = bcrypt.hashSync(randomPassword, 10);
@@ -72,8 +73,8 @@ route.get(
  * Endpoint to login with existing username and valid password
  * http://localhost:3000/authentication/login?username=someuser&password=somepassword
  */
-route.get("/authentication/login", async (request, response) => {
-  const { username, password } = request.query;
+route.post("/authentication/login", async (request, response) => {
+  const { username, password } = request.body;
   let token = null;
 
   const user = await PrismaClient.user.findUnique({

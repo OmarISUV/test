@@ -18,6 +18,7 @@ const middleware = (request, response, next) => {
     return response.sendStatus(403);
   }
   request.tokenInfo = tokenInfo;
+  console.log(request.tokenInfo)
   return next();
 };
 
