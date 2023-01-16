@@ -1,28 +1,28 @@
 import { client as PrismaClient } from "../../src/config/prisma.mjs";
 
-//Add Roles
+// Add roles
 const masterRol = await PrismaClient.rol.create({
   data: {
-    name: "Maestro"
-  }
+    key: "master",
+    name: "Maestro",
+  },
 });
 
 const trainerRol = await PrismaClient.rol.create({
   data: {
-    name: "Aprendiz"
-  }
+    key: "trainer",
+    name: "Aprendiz",
+  },
 });
 
-
-// Add first Ma
+// Add first master user
 await PrismaClient.user.create({
   data: {
     username: "omar",
     name: "omar",
-    // cqqzq
-    password: "$2b$10$1sTvRkjN1rHi2ybLFSkV5uXhFC4728EeposYzudz7d7CZmlhSqncS",
+    password: "$2b$10$1sTvRkjN1rHi2ybLFSkV5uXhFC4728EeposYzudz7d7CZmlhSqncS", // cqqzq
     rol: {
-      connect: { id: masterRol.id}
-    }
+      connect: { id: masterRol.id },
+    },
   },
 });
