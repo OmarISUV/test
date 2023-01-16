@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
 import express from "express";
 import { route as HelloRoute } from "./routes/hello.mjs";
+
+
 
 const service = express();
 

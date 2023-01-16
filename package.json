@@ -1,5 +1,5 @@
 {
-  "name": "<G_NAME>",
+  "name": "omar",
   "version": "0.0.0",
   "main": "src/service.mjs",
   "scripts": {
@@ -14,7 +14,9 @@
   "dependencies": {
     "@vendia/serverless-express": "^4.10.1",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0"
   },
   "nodemonConfig": {
     "watch": [
