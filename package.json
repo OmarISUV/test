@@ -1,0 +1,32 @@
+{
+  "name": "<G_NAME>",
+  "version": "0.0.0",
+  "main": "src/service.mjs",
+  "scripts": {
+    "env:dev": "cp -f .env.dev .env",
+    "dev": "npx nodemon",
+    "start": "node -e 'import(\"./handler.mjs\").then( m => m.listen() )'",
+    "deploy": "npx serverless deploy --force --verbose",
+    "info": "npx serverless info --verbose",
+    "logs": "npx serverless logs -f service -t",
+    "remove": "npx serverless remove --verbose"
+  },
+  "dependencies": {
+    "@vendia/serverless-express": "^4.10.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/**",
+      "handler.mjs"
+    ],
+    "ignore": [
+      "test/**",
+      "node_modules"
+    ],
+    "ext": "mjs,js,json",
+    "exec": "node -e 'import(\"./handler.mjs\").then( m => m.listen() )'",
+    "legacyWatch": true
+  }
+}
