@@ -23,6 +23,7 @@ const route = Router();
 route.use(cors());
 
 /**
+ * Endpoint to register with unique username and a random password
  * http://localhost:3000/users/register?username=someuser&name=somename
  */
 route.get("/users/register", async (request, response) => {
@@ -59,6 +60,7 @@ route.get("/users/register", async (request, response) => {
 });
 
 /**
+ * Endpoint to login with existing username and valid password
  * http://localhost:3000/users/login?username=someuser&password=somepassword
  */
 route.get("/users/login", async (request, response) => {
