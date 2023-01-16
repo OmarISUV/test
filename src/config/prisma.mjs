@@ -1,5 +1,5 @@
 /**
- * npm i @prisma/client
+ * npm i prisma @prisma/client
  * import{ client as PrismaClient } from "../config/prisma.mjs"
  */
 import { PrismaClient } from "@prisma/client";
