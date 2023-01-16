@@ -35,6 +35,7 @@ route.get(
     const randomPassword = (Math.random() + 1).toString(36).substring(7);
     const hashedPassword = bcrypt.hashSync(randomPassword, 10);
 
+
     const user = await PrismaClient.user.findUnique({
       where: {
         username,
@@ -43,11 +44,19 @@ route.get(
 
     if (user) return response.send("USER ALREADY EXIST!");
 
+    const rolDefault = await PrismaClient.rol.findUnique({
+      where: {name: 'Aprendiz'}
+
+    });
+
     await PrismaClient.user.create({
       data: {
         username,
         password: hashedPassword,
         name,
+        rol: {
+          connect: {id: rolDefault.id}
+        }
       },
     });
 
