@@ -5,7 +5,7 @@ import { Router } from "express";
 import cors from "cors";
 import { client as PrismaClient } from "../config/prisma.mjs";
 import { middleware as AuthenticationMiddleware } from "../middleware/authentication.mjs";
-import { middleware as AuthorizationMiddleware } from "../middleware/authorization.mjs"
+import { middleware as AuthorizationMiddleware } from "../middleware/authorization.mjs";
 
 /**
  * Function to generate a JWT
@@ -29,7 +29,7 @@ route.use(cors());
 route.post(
   "/authentication/register",
   AuthenticationMiddleware,
-  AuthorizationMiddleware,
+  AuthorizationMiddleware("master"),
   async (request, response) => {
     const { username, name } = request.body;
 
